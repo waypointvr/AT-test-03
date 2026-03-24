@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+</head>
+<body>
+  <a-scene 
+    mindar-image="imageTargetSrc: ./my-marker.mind;"
+    color-space="sRGB"
+    renderer="colorManagement: true, physicallyCorrectLights"
+    vr-mode-ui="enabled: false"
+    device-orientation-permission-ui="enabled: false">
+
+    <!-- Your assets (add more if needed) -->
+    <a-assets>
+      <!-- Replace with your own image if using one -->
+      <img id="my-content" src="my-content.png">
+      <!-- Optional: free GLTF model (replace URL or use local) -->
+      <!-- <a-asset-item id="model" src="https://your-model.glb"></a-asset-item> -->
+    </a-assets>
+
+    <!-- Camera -->
+    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+    <!-- The AR content – attached to your custom marker -->
+    <a-entity mindar-image-target="targetIndex: 0">
+
+      <!-- OPTION 1: Display a floating IMAGE above the marker -->
+      <a-plane 
+        src="#my-content" 
+        position="0 0.3 0"   <!-- Adjust Y (height) to float higher/lower -->
+        rotation="0 0 0" 
+        width="0.5" 
+        height="0.5" 
+        material="transparent: true; opacity: 0.9">
+      </a-plane>
+
+      <!-- OPTION 2: Display a floating 3D OBJECT (use this OR the image above) -->
+      <!-- <a-box color="orange" position="0 0.3 0" scale="0.2 0.2 0.2"></a-box> -->
+      <!-- Or real GLTF model: -->
+      <!-- <a-gltf-model src="#model" position="0 0.3 0" scale="0.1 0.1 0.1"></a-gltf-model> -->
+
+    </a-entity>
+  </a-scene>
+</body>
+</html>
